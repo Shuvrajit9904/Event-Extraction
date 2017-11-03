@@ -1,0 +1,77 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Nov 02 18:25:28 2017
+
+@author: Shuvrajit
+"""
+
+import os
+import numpy as np
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cross_validation import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.neural_network import MLPClassifier
+from sklearn.cluster import KMeans
+
+
+incident = {'ARSON':1, 'ATTACK':2, 'BOMBING':3, 'KIDNAPPING':4, 'ROBBERY':5}
+revinc = {1:'ARSON', 2:'ATTACK', 3:'BOMBING', 4:'KIDNAPPING', 5:'ROBBERY'}
+
+#Reading Files from two Different Foolder
+#developset/texts contains the documents
+#'developset/answers' contains the labels
+#Answers are template based, which contains other information such as:
+#ID, INCIDENT, WEAPON, PERP INDIV, PERP ORG, TARGET, VICTIM
+#We Only need The value of Incident
+#This job is done below
+
+example = [] #stores the document
+label = [] #stores corresponding label
+
+answerfolder = 'developset/answers'
+textfolder = 'developset/texts'
+for files in os.listdir(textfolder):    
+    ansextension = "".join([files,'.anskey'])
+    textpath = os.path.join(textfolder,files)
+    anspath = os.path.join(answerfolder,ansextension)
+    ftext = open(textpath)
+    flabel = open(anspath)
+    text = ftext.read()
+    example.append(text)
+    answer = flabel.read()
+    answer = answer.split('\n')
+    for slots in answer:
+        slot = slots.split(':')
+        if slot[0] == 'INCIDENT':
+            l = slot[-1].strip()            
+            lab = incident[l]
+            label.append(lab)
+    ftext.close()
+    flabel.close()
+            
+
+countVec = TfidfVectorizer(stop_words = 'english')
+
+#Dividing the available dataset into training and test set
+x_train, x_test, y_train, y_test = train_test_split(example, label, 
+                                                    test_size =0.2)
+
+#Creating tf-idf vector for the documents
+x_trainCV = countVec.fit_transform(x_train)
+x_testCV = countVec.transform(x_test)
+
+#converting the vectors into array to use further
+x_train = x_trainCV.toarray()
+x_test = x_testCV.toarray()
+
+#Training and Testing on SCikit Neural Network library
+neural = MLPClassifier().fit(x_train,y_train)
+accuracy = neural.score(x_test, y_test)
+out = neural.predict([x_test[0]])
+
+'''
+To be added:
+making prediction on new files in runtime
+'''
