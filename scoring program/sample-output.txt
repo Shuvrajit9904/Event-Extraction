@@ -1,0 +1,45 @@
+
+ID:             DEV-MUC3-0006
+INCIDENT:       ATTACK
+WEAPON:         ARTILLERY FIRE
+                EXPLOSIONS
+PERP INDIV:     -
+PERP ORG:       -
+TARGET:         ELECTRIC TOWERS
+                REBEL POSITIONS
+VICTIM:         -
+
+ID:             DEV-MUC3-0012
+INCIDENT:       BOMBING
+WEAPON:         -
+PERP INDIV:     -
+PERP ORG:       -
+TARGET:         -
+VICTIM:         ENRIQUE LOPEZ ALBUJAR
+
+ID:             DEV-MUC3-0014
+INCIDENT:       ATTACK
+WEAPON:         MACHINE-GUN
+PERP INDIV:     MULTIPLE CRIME
+PERP ORG:       -
+TARGET:         -
+VICTIM:         CLERGYMEN
+
+ID:             DEV-MUC3-0023
+INCIDENT:       ROBBERY
+WEAPON:         -
+PERP INDIV:     16 SUSPECTS
+PERP ORG:       MRTA
+                SHINING PATH
+TARGET:         -
+VICTIM:         -
+
+ID:             DEV-MUC3-0025
+INCIDENT:       KIDNAPPING
+WEAPON:         -
+PERP INDIV:     MEN
+PERP ORG:       -
+TARGET:         -
+VICTIM:         WE
+                
+
